@@ -60,8 +60,8 @@ app.UseSwagger();
 
 app.UseSwaggerUI( c =>
 {
-    c.SwaggerEndpoint( "/swagger/v1/swagger.json", "CRM API V1" );
-    c.DocumentTitle = "IW CRM";
+    c.SwaggerEndpoint( "/swagger/v1/swagger.json", "IW001 API V1" );
+    c.DocumentTitle = "IW001";
 } );
 
 app.UseRouting();
