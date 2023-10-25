@@ -28,7 +28,7 @@ namespace CCA.API.Repository
                 {
                     using (var dbContext = new DataContext( GetConfiguration() ))
                     {
-                        dbContext.AccountStatement.Add( model );
+                        dbContext.CurrentAccountStatement.Add( model );
                         dbContext.SaveChangesAsync();
                         dbContext.Dispose();
                     }
@@ -52,7 +52,7 @@ namespace CCA.API.Repository
                 {
                     using (var dbContext = new DataContext( GetConfiguration() ))
                     {
-                        var Statement = dbContext.AccountStatement.Where( x => x.Id == model.Id ).FirstOrDefault();
+                        var Statement = dbContext.CurrentAccountStatement.Where( x => x.Id == model.Id ).FirstOrDefault();
                         if (Statement != null)
                         {
                             Statement.Description = model.Description;
@@ -60,7 +60,7 @@ namespace CCA.API.Repository
                             Statement.Value = model.Value;
                             Statement.Loose = model.Loose;
                             Statement.State = model.State;
-                            dbContext.AccountStatement.Update( Statement );
+                            dbContext.CurrentAccountStatement.Update( Statement );
                             dbContext.SaveChangesAsync();
                             dbContext.Dispose();
                         }
@@ -86,9 +86,9 @@ namespace CCA.API.Repository
                 {
                     using (var dbContext = new DataContext( GetConfiguration() ))
                     {
-                        Statement = dbContext.AccountStatement.Where( x => x.Id == id ).FirstOrDefault();
+                        Statement = dbContext.CurrentAccountStatement.Where( x => x.Id == id ).FirstOrDefault();
                         Statement.State = false;
-                        dbContext.AccountStatement.Update( Statement );
+                        dbContext.CurrentAccountStatement.Update( Statement );
                         dbContext.SaveChangesAsync();
                     }
                 }
@@ -107,7 +107,7 @@ namespace CCA.API.Repository
 
             using (var dbContext = new DataContext( GetConfiguration() ))
             {
-                Statement = await dbContext.AccountStatement
+                Statement = await dbContext.CurrentAccountStatement
                     .AsNoTracking()
                     .Where( x => x.Id == Id && x.State)
                     .FirstOrDefaultAsync();
@@ -124,7 +124,7 @@ namespace CCA.API.Repository
             using (var dbContext = new DataContext( GetConfiguration() ))
             {
                 startements = await dbContext
-                .AccountStatement
+                .CurrentAccountStatement
                 .AsNoTracking()
                 .Where( x => x.State )
                 .ToListAsync();
