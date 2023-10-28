@@ -87,8 +87,7 @@ namespace CCA.API.Repository
                     using (var dbContext = new DataContext( GetConfiguration() ))
                     {
                         Statement = dbContext.CurrentAccountStatement.Where( x => x.Id == id ).FirstOrDefault();
-                        Statement.State = false;
-                        dbContext.CurrentAccountStatement.Update( Statement );
+                        dbContext.CurrentAccountStatement.Remove( Statement );
                         dbContext.SaveChangesAsync();
                     }
                 }
@@ -109,7 +108,7 @@ namespace CCA.API.Repository
             {
                 Statement = await dbContext.CurrentAccountStatement
                     .AsNoTracking()
-                    .Where( x => x.Id == Id && x.State)
+                    .Where( x => x.Id == Id )
                     .FirstOrDefaultAsync();
                 dbContext.Dispose();
             }
@@ -126,13 +125,37 @@ namespace CCA.API.Repository
                 startements = await dbContext
                 .CurrentAccountStatement
                 .AsNoTracking()
-                .Where( x => x.State )
                 .ToListAsync();
 
                 dbContext.Dispose();
             }
 
             return startements;
+        }
+
+        public static async Task<CurrentAccountStatement> Cancel( int id )
+        {
+            var Statement = new CurrentAccountStatement();
+
+            try
+            {
+                lock (databaseLock)
+                {
+                    using (var dbContext = new DataContext( GetConfiguration() ))
+                    {
+                        Statement = dbContext.CurrentAccountStatement.Where( x => x.Id == id ).FirstOrDefault();
+                        Statement.State = false;
+                        dbContext.CurrentAccountStatement.Update( Statement );
+                        dbContext.SaveChangesAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Statement;
         }
 
         #endregion

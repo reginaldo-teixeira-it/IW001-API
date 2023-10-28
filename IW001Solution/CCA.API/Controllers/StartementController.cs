@@ -67,5 +67,12 @@ namespace CCA.API.Controllers
         [AllowAnonymous]
         public async Task<CurrentAccountStatement> Delete( int id ) => await CCARepository.Delete( id );
 
+        [HttpPut]
+        [Route( "cancel/{id:int}" )]
+        [AllowAnonymous]
+        public async Task<CurrentAccountStatement> Cancel( int id ) => await CCARepository.Cancel( id );
+
+
+
     }
 }
