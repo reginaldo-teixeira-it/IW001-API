@@ -19,7 +19,7 @@ namespace CCA.API.Repository
 
         #region Crud CurrentAccountStatement
 
-        public static async Task<CurrentAccountStatement> Create( CurrentAccountStatement model )
+        public static async Task<CurrentAccountStatementModel> Create( CurrentAccountStatementModel model )
         {
 
             try
@@ -43,7 +43,7 @@ namespace CCA.API.Repository
             return model;
         }
 
-        public static async Task<CurrentAccountStatement> Update( CurrentAccountStatement model )
+        public static async Task<CurrentAccountStatementModel> Update( CurrentAccountStatementModel model )
         {
 
             try
@@ -76,9 +76,9 @@ namespace CCA.API.Repository
             return model;
         }
 
-        public static async Task<CurrentAccountStatement> Delete( int id )
+        public static async Task<CurrentAccountStatementModel> Delete( int id )
         {
-            var Statement = new CurrentAccountStatement();
+            var Statement = new CurrentAccountStatementModel();
 
             try
             {
@@ -100,9 +100,9 @@ namespace CCA.API.Repository
             return Statement;
         }
 
-        public static async Task<CurrentAccountStatement> GetById( int Id )
+        public static async Task<CurrentAccountStatementModel> GetById( int Id )
         {
-            var Statement = new CurrentAccountStatement();
+            var Statement = new CurrentAccountStatementModel();
 
             using (var dbContext = new DataContext( GetConfiguration() ))
             {
@@ -116,9 +116,9 @@ namespace CCA.API.Repository
             return Statement;
         }
 
-        public static async Task<List<CurrentAccountStatement>> GetAll()
+        public static async Task<List<CurrentAccountStatementModel>> GetAll()
         {
-            var startements = new List<CurrentAccountStatement>();
+            var startements = new List<CurrentAccountStatementModel>();
 
             using (var dbContext = new DataContext( GetConfiguration() ))
             {
@@ -133,9 +133,9 @@ namespace CCA.API.Repository
             return startements;
         }
 
-        public static async Task<CurrentAccountStatement> Cancel( int id )
+        public static async Task<CurrentAccountStatementModel> Cancel( int id )
         {
-            var Statement = new CurrentAccountStatement();
+            var Statement = new CurrentAccountStatementModel();
 
             try
             {

@@ -12,16 +12,16 @@ namespace CCA.API.Controllers
         [HttpGet]
         [Route( "get-all" )]
         [AllowAnonymous]
-        public async Task<ActionResult<List<CurrentAccountStatement>>> GetAll() => CCARepository.GetAll().Result;
+        public async Task<ActionResult<List<CurrentAccountStatementModel>>> GetAll() => CCARepository.GetAll().Result;
 
         [HttpGet]
         [Route( "get-byid/{id:int}" )]
         [AllowAnonymous]
-        public async Task<CurrentAccountStatement> GetByID( int id ) => await CCARepository.GetById( id );
+        public async Task<CurrentAccountStatementModel> GetByID( int id ) => await CCARepository.GetById( id );
 
         [HttpPost]
         [Route( "create" )]
-        public async Task<ActionResult<CurrentAccountStatement>> Create( [FromBody] CurrentAccountStatement model )
+        public async Task<ActionResult<CurrentAccountStatementModel>> Create( [FromBody] CurrentAccountStatementModel model )
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -41,13 +41,13 @@ namespace CCA.API.Controllers
 
         [HttpPut]
         [Route( "update" )]
-        public async Task<ActionResult<CurrentAccountStatement>> Update( [FromBody] CurrentAccountStatement model )
+        public async Task<ActionResult<CurrentAccountStatementModel>> Update( [FromBody] CurrentAccountStatementModel model )
         {
             if (!ModelState.IsValid)
                 return BadRequest( ModelState );
 
             if (model.Id <= 0)
-                return NotFound( new { message = "dado não encontrad" } );
+                return NotFound( new { message = "dado não encontrado" } );
 
             try
             {
@@ -65,12 +65,12 @@ namespace CCA.API.Controllers
         [HttpDelete]
         [Route( "delete/{id:int}" )]
         [AllowAnonymous]
-        public async Task<CurrentAccountStatement> Delete( int id ) => await CCARepository.Delete( id );
+        public async Task<CurrentAccountStatementModel> Delete( int id ) => await CCARepository.Delete( id );
 
         [HttpPut]
         [Route( "cancel/{id:int}" )]
         [AllowAnonymous]
-        public async Task<CurrentAccountStatement> Cancel( int id ) => await CCARepository.Cancel( id );
+        public async Task<CurrentAccountStatementModel> Cancel( int id ) => await CCARepository.Cancel( id );
 
 
 

@@ -10,6 +10,6 @@ namespace CCA.API.Data
         {
         }
 
-        public DbSet<CurrentAccountStatement> CurrentAccountStatement { get; set; }
+        public DbSet<CurrentAccountStatementModel> CurrentAccountStatement { get; set; }
     }
 }
