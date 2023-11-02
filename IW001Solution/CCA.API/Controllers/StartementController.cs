@@ -6,7 +6,7 @@ using System;
 
 namespace CCA.API.Controllers
 {
-    [Route( "v1/startement" )]
+    [Route( "v1/startement/" )]
     public class StartementController : Controller
     {
         [HttpGet]
@@ -41,7 +41,7 @@ namespace CCA.API.Controllers
 
         [HttpPut]
         [Route( "update" )]
-        public async Task<ActionResult<CurrentAccountStatementModel>> Update( [FromBody] CurrentAccountStatementModel model )
+        public async Task<ActionResult<CurrentAccountStatementModel>> UpdateADD( [FromBody] CurrentAccountStatementModel model )
         {
             if (!ModelState.IsValid)
                 return BadRequest( ModelState );
